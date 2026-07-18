@@ -22,6 +22,7 @@ _season_end_cap = date(SEASONS[-1], 11, 30)
 END_DATE = min(_yesterday, _season_end_cap).strftime("%Y-%m-%d")
 
 RAW_COLUMNS = [
+    "game_pk",                          # <-- add this
     "pitch_type", "release_speed", "release_spin_rate",
     "balls", "strikes", "outs_when_up",
     "on_1b", "on_2b", "on_3b",
