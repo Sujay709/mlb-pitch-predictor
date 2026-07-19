@@ -14,7 +14,7 @@ for d in [DATA_RAW_DIR, DATA_PROCESSED_DIR, MODELS_DIR, FIGURES_DIR]:
 PITCHER_NAME = "Framber Valdez"
 PITCHER_ID = None
 
-SEASONS = [2024, 2025, 2026]
+SEASONS = [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
 START_DATE = f"{SEASONS[0]}-03-01"
 
 _yesterday = date.today() - timedelta(days=1)
