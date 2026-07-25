@@ -57,23 +57,23 @@ pip install -r requirements.txt
 
 ## Testing a different pitcher
 
-Want to try this on someone other than Framber Valdez? Open up `config.py` and find this line:
+To run this analysis on a different pitcher, open `config.py` and update the following line:
 
 ```python
 PITCHER_NAME = "Framber Valdez"
 ```
 
-Just swap in whoever you want, like:
+Replace the name with the pitcher you want to analyze, for example:
 
 ```python
 PITCHER_NAME = "Zack Wheeler"
 ```
 
-That's really the only thing you need to change. Every other script reads the pitcher's name from this config, so the whole pipeline follows along automatically once you update it here.
+This is the only change required. All other scripts read the pitcher name from this config file, so the rest of the pipeline will automatically use the updated value.
 
 ## Running the pipeline
 
-The scripts build on each other, so they need to be run in order:
+The scripts have sequential dependencies and must be run in the following order:
 
 ```
 python config.py
@@ -83,4 +83,10 @@ python train.py
 python eval.py
 ```
 
-Here's what each one is doing along the way. `config.py` sets the pitcher name and other shared settings that the rest of the scripts rely on. `datapull.py` goes and pulls the Statcast data for that pitcher through `pybaseball`. `features.py` takes that raw data and builds out the sequence and game-state features described above. `train.py` trains and tunes the models, logistic regression, random forest, and HistGradientBoosting. And `eval.py` runs the trained model against the validation season and spits out the confusion matrix figures.
+Each script's role in the pipeline is as follows:
+
+1. `config.py` defines `PITCHER_NAME` and other shared settings used throughout the pipeline.
+2. `datapull.py` pulls Statcast data for the configured pitcher using `pybaseball`.
+3. `features.py` constructs the sequence and game-state features described above.
+4. `train.py` trains and tunes the models (logistic regression, random forest, and HistGradientBoosting).
+5. `eval.py` evaluates the trained model on the validation season and generates the confusion matrix figures.
