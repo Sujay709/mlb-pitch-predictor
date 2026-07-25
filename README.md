@@ -54,3 +54,33 @@ This is a single-pitcher model trained on a fairly small dataset (~19k pitches a
 ```
 pip install -r requirements.txt
 ```
+
+## Testing a different pitcher
+
+Want to try this on someone other than Framber Valdez? Open up `config.py` and find this line:
+
+```python
+PITCHER_NAME = "Framber Valdez"
+```
+
+Just swap in whoever you want, like:
+
+```python
+PITCHER_NAME = "Zack Wheeler"
+```
+
+That's really the only thing you need to change. Every other script reads the pitcher's name from this config, so the whole pipeline follows along automatically once you update it here.
+
+## Running the pipeline
+
+The scripts build on each other, so they need to be run in order:
+
+```
+python config.py
+python datapull.py
+python features.py
+python train.py
+python eval.py
+```
+
+Here's what each one is doing along the way. `config.py` sets the pitcher name and other shared settings that the rest of the scripts rely on. `datapull.py` goes and pulls the Statcast data for that pitcher through `pybaseball`. `features.py` takes that raw data and builds out the sequence and game-state features described above. `train.py` trains and tunes the models, logistic regression, random forest, and HistGradientBoosting. And `eval.py` runs the trained model against the validation season and spits out the confusion matrix figures.
